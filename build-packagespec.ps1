@@ -3,7 +3,7 @@ $LokiVersion = $Props.UPSTREAM_VERSION
 "Building Upstream Version: $LokiVersion"
 ""
 
-$ChecksumResponse = Invoke-WebRequest -Uri "https://github.com/grafana/loki/releases/download/v$LokiVersion/SHA256SUMS"
+$ChecksumResponse = Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/grafana/loki/releases/download/v$LokiVersion/SHA256SUMS"
 $LokiLogcliChecksum = (($ChecksumResponse.tostring() -split "[`r`n]" | Select-String "logcli-windows-amd64.exe.zip" | Select-Object -First 1) -split " ")[0].ToUpper()
 
 "Discovered Checksum: $LokiLogcliChecksum"
